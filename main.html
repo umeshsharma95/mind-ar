@@ -1,0 +1,69 @@
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-face-aframe.prod.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+      integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <style>
+      #image-overlay .top {
+        display: flex;
+        align-items: center;
+        /* justify-content: center; */
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: transparent;
+        z-index: 2;
+      }
+      #image-overlay .bottom {
+        display: flex;
+        align-items: center;
+        /* justify-content: center; */
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: transparent;
+        z-index: 2;
+      }
+      #image-overlay img.top {
+        width: 50%;
+        /* height: 100%; */
+        align-self: center;
+      }
+      #image-overlay img.bottom {
+        width: 100%;
+        /* height: 100%; */
+        align-self: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="image-overlay" class="">
+        <img class="top" src="./christmas_corner.png">
+        <img class="bottom" src="./christmas-tree-clip-art.png">
+        <!-- <button type="button" id="capture-button">Save</button> -->
+      </div>
+      <a-scene id="my_camera" mindar-face embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+        <a-assets>
+          <a-asset-item id="hatModel" src="./santa_claus_hat.glb"></a-asset-item>
+          <a-asset-item id="headModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.2/examples/face-tracking/assets/sparkar/headOccluder.glb"></a-asset-item>
+        </a-assets>
+        <a-camera active="false" position="0 0 0"></a-camera>
+        <a-entity mindar-face-target="anchorIndex: 168">
+          <a-gltf-model mindar-face-occluder rotation="0 0 0" position="-0.1 0 0" scale="0.08 0.05 0.08" src="#headModel"></a-gltf-model>
+        </a-entity>
+        <a-entity mindar-face-target="anchorIndex: 10">
+          <a-gltf-model rotation="-2 0 0" position="-0.1 -0.1 -1.0" scale="0.005 0.005 0.005" src="#hatModel" class="hat1-entity"></a-gltf-model>
+        </a-entity>
+      </a-scene>
+    </div>
+  </body>
+</html>
